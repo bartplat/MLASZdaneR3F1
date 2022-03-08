@@ -11,7 +11,6 @@ l_kobiet(x)
 }
 \value{
 liczba
-#' @importFrom dplyr \%>\% filter count pull
 }
 \description{
 Funkcja oblicza wskaźnik opisujący liczbę zbadanych kobiet w

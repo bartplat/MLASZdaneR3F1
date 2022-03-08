@@ -3,6 +3,7 @@
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>%
+#' @export
 dane_szkoly = function(x) {
   stopifnot(is.data.frame(x))
 
@@ -16,6 +17,7 @@ dane_szkoly = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>% summarise case_when n_distinct .data
+#' @export
 firma_bad = function(x) {
   x = x %>%
     summarise(firma = case_when(n_distinct(.data$FIRMA) > 1 ~ "ndt.",
@@ -29,6 +31,7 @@ firma_bad = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return liczba
 #' @importFrom dplyr %>% count pull
+#' @export
 l_abs = function(x) {
   x %>%
     count(.data$plec) %>%
@@ -42,6 +45,7 @@ l_abs = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return liczba
 #' @importFrom dplyr %>% count pull
+#' @export
 l_abs_WT = function(x) {
   x %>%
     count(.data$plec, wt = .data$waga) %>%
@@ -54,7 +58,8 @@ l_abs_WT = function(x) {
 #' grupie.
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return liczba
-#' #' @importFrom dplyr %>% filter count pull
+#' @importFrom dplyr %>% filter count pull
+#' @export
 l_kobiet = function(x) {
   x %>%
     filter(.data$plec %in% 1) %>%
@@ -68,7 +73,8 @@ l_kobiet = function(x) {
 #' zbadanych kobiet w grupie.
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return liczba
-#' #' @importFrom dplyr %>% filter count pull
+#' @importFrom dplyr %>% filter count pull
+#' @export
 l_kobiet_WT = function(x) {
   x %>%
     filter(.data$plec %in% 1) %>%
@@ -83,6 +89,7 @@ l_kobiet_WT = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>% .data case_when distinct mutate select
+#' @export
 formy = function(x) {
   l_kobiet = x %>%
     filter(.data$plec %in% 1) %>%
@@ -126,6 +133,7 @@ formy = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>% count
+#' @export
 zawod_licz = function(x) {
   zaw = x %>%
     count(.data$zawod_nazwa) %>%
@@ -139,6 +147,7 @@ zawod_licz = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>% count
+#' @export
 zawod_licz_WT = function(x) {
   zaw = x %>%
     count(.data$zawod_nazwa, wt = .data$waga) %>%
@@ -161,6 +170,7 @@ zawod_licz_WT = function(x) {
 #' }
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
+#' @export
 W1_pon_wyb = function(x) {
   nka = sum(x$W1 %in% c(1:7), na.rm = TRUE)
 
@@ -190,6 +200,7 @@ W1_pon_wyb = function(x) {
 #' }
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
+#' @export
 W1_pon_wyb_WT = function(x) {
   nka = sum(as.numeric(x$W1 %in% c(1:7)) * x$waga, na.rm = TRUE)
 
@@ -223,6 +234,7 @@ W1_pon_wyb_WT = function(x) {
 #' }
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
+#' @export
 W2_przyg_zaw = function(x) {
   nka = sum(x$W2 %in% c(1:5, 7), na.rm = TRUE)
 
@@ -259,6 +271,7 @@ W2_przyg_zaw = function(x) {
 #' }
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
+#' @export
 W2_przyg_zaw_WT = function(x) {
   nka = sum(as.numeric(x$W2 %in% c(1:5, 7)) * x$waga, na.rm = TRUE)
 
@@ -281,6 +294,7 @@ W2_przyg_zaw_WT = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>% select filter count left_join
+#' @export
 W2_zawod = function(x) {
   mapp = x %>%
     count(.data$zawod_nazwa, name = "mian")
@@ -303,6 +317,7 @@ W2_zawod = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>% select filter count left_join
+#' @export
 W2_zawod_WT = function(x) {
   mapp = x %>%
     count(.data$zawod_nazwa, name = "mian", wt = .data$waga)
@@ -336,6 +351,7 @@ W2_zawod_WT = function(x) {
 #' }
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
+#' @export
 NZ2_pnz_szk = function(x) {
   nka = sum(x$NZ2_3 %in% c(1:5, 7), na.rm = TRUE)
 
@@ -369,6 +385,7 @@ NZ2_pnz_szk = function(x) {
 #' }
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
+#' @export
 NZ2_pnz_szk_WT = function(x) {
   nka = sum(as.numeric(x$NZ2_3 %in% c(1:5, 7)) * x$waga, na.rm = TRUE)
 
@@ -402,6 +419,7 @@ NZ2_pnz_szk_WT = function(x) {
 #' }
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
+#' @export
 NZ2_pnz_prac = function(x) {
   nka = sum(x$NZ2_1 %in% c(1:5, 7), na.rm = TRUE)
 
@@ -435,6 +453,7 @@ NZ2_pnz_prac = function(x) {
 #' }
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
+#' @export
 NZ2_pnz_prac_WT = function(x) {
   nka = sum(as.numeric(x$NZ2_1 %in% c(1:5, 7)) * x$waga, na.rm = TRUE)
 
@@ -466,6 +485,7 @@ NZ2_pnz_prac_WT = function(x) {
 #' zaznaczyli chociaż jedną odpowiedź "Tak, taki mam plan" (kod 1.)
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
+#' @export
 PL1_plany_eduk = function(x) {
   nka = sum(x$PL1_6 %in% c(1:3, 7), na.rm = TRUE)
 
@@ -502,6 +522,7 @@ PL1_plany_eduk = function(x) {
 #' zaznaczyli chociaż jedną odpowiedź "Tak, taki mam plan" (kod 1.)
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
+#' @export
 PL1_plany_eduk_WT = function(x) {
   nka = sum(as.numeric(x$PL1_6 %in% c(1:3, 7)) * x$waga, na.rm = TRUE)
 
@@ -528,6 +549,7 @@ PL1_plany_eduk_WT = function(x) {
 #' zakończeniu nauki w obecnej szkole planuje Pani/Pan poszukiwać pracy?".
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
+#' @export
 PL2_plany_praca = function(x) {
   nka = sum(x$PL2 %in% c(1:3) | x$PL1_6 %in% 3, na.rm = TRUE)
 
@@ -551,6 +573,7 @@ PL2_plany_praca = function(x) {
 #' poszukiwać pracy?".
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
+#' @export
 PL2_plany_praca_WT = function(x) {
   nka = sum(as.numeric(x$PL2 %in% c(1:3) | x$PL1_6 %in% 3) * x$waga, na.rm = TRUE)
 
@@ -573,6 +596,7 @@ PL2_plany_praca_WT = function(x) {
 #' z wyuczonym zawodem w ciągu roku od ukończenia nauki - pytanie PL5A kod 1.
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
+#' @export
 PL5A_praca_branza = function(x) {
   nka = sum(x$PL5A %in% c(1:3, 7), na.rm = TRUE)
 
@@ -592,6 +616,7 @@ PL5A_praca_branza = function(x) {
 #' kod 1.
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
+#' @export
 PL5A_praca_branza_WT = function(x) {
   nka = sum(as.numeric(x$PL5A %in% c(1:3, 7)) * x$waga, na.rm = TRUE)
 
@@ -611,6 +636,7 @@ PL5A_praca_branza_WT = function(x) {
 #' PL5B_1 kod 1.
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
+#' @export
 PL5B_praca_branza_plan = function(x) {
   nka = sum(x$PL5B_1 %in% c(1:3, 7), na.rm = TRUE)
 
@@ -630,6 +656,7 @@ PL5B_praca_branza_plan = function(x) {
 #' pytanie PL5B_1 kod 1.
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
+#' @export
 PL5B_praca_branza_plan_WT = function(x) {
   nka = sum(as.numeric(x$PL5B_1 %in% c(1:3, 7)) * x$waga, na.rm = TRUE)
 
@@ -649,6 +676,7 @@ PL5B_praca_branza_plan_WT = function(x) {
 #' (\code{\link{PL1_plany_eduk_WT}})
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
+#' @export
 PL1_poza = function(x) {
   nka = sum(x$PL1_6 %in% c(1:3, 7), na.rm = TRUE)
 
@@ -678,6 +706,7 @@ PL1_poza = function(x) {
 #' (\code{\link{PL1_plany_eduk_WT}})
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
+#' @export
 PL1_poza_WT = function(x) {
   nka = sum(as.numeric(x$PL1_6 %in% c(1:3, 7)) * x$waga, na.rm = TRUE)
 

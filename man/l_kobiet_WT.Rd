@@ -11,7 +11,6 @@ l_kobiet_WT(x)
 }
 \value{
 liczba
-#' @importFrom dplyr \%>\% filter count pull
 }
 \description{
 Funkcja oblicza \strong{ważony} wskaźnik opisujący liczbę
